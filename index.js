@@ -8,17 +8,31 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator= require('express-validator');
 var flash = require('connect-flash');
-var Firebase = require('firebase');
-var fbRef = new Firebase('https://mnma-a92a5.firebaseio.com/');
+var firebase = require('firebase');
+
+//Firebase
+firebase.initializeApp = {
+    apiKey: "AIzaSyB7R3PhMVck6Q74_KhwL60WCA9fwMd70Mk",
+    authDomain: "mnma-a92a5.firebaseapp.com",
+    databaseURL: "https://mnma-a92a5.firebaseio.com",
+    projectId: "mnma-a92a5",
+    storageBucket: "mnma-a92a5.appspot.com",
+    messagingSenderId: "67218275465"
+  };
+
 
 //Route files
 var routes = require('./routes/index');
-var routes = require('./routes/albums');
-var routes = require('./routes/geners');
-var routes = require('./routes/users');
+var albums = require('./routes/albums');
+var genres = require('./routes/genres');
+var users = require('./routes/users');
 
 //Init App
   var app = express();
+
+  //view engine
+  app.set('views', path.join(__dirname,'views'));
+  app.set('view engine', 'ejs');
 
 //middlewares
 //logger
@@ -38,14 +52,14 @@ app.use(session({
 }));
 
 //Validators
-app.use(exoressValidator({
+app.use(expressValidator({
   errorFormatter: function(param, msg, value){
     var namespace = param.split(',')
     var root = namespace.shift()
     var formParam = root;
 
     while (namespace.length) {
-      formParam + = '[' +namespace.shift() +']';
+      formParam += '[' + namespace.shift() +']';
     }
     return{
       param: formParam,
@@ -57,7 +71,6 @@ app.use(exoressValidator({
 
 //static folder
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 //connect flash middlewares
 app.use(flash());
@@ -75,8 +88,8 @@ app.use(function(req,res,next){
 //routes middlewares
 app.use('/', routes);
 app.use('/albums', albums);
-app.use('/geners', geners);
-app.use('/users', users);
+app.use('/genres',genres);
+app.use('/users',users);
 
 //set port
 
