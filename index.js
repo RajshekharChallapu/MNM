@@ -10,6 +10,8 @@ var expressValidator= require('express-validator');
 var flash = require('connect-flash');
 var firebase = require('firebase');
 
+
+
 //Firebase
 firebase.initializeApp = {
     apiKey: "AIzaSyB7R3PhMVck6Q74_KhwL60WCA9fwMd70Mk",

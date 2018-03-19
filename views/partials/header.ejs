@@ -2,12 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8">
+
     <title>MnM</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-default">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -20,7 +21,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse navbar-right">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="/users/register">Register</a></li>
+                <li><a href="/users/register">Register</a></li>
                 <li><a href="/users/login">Login</a></li>
               </ul>
             </div><!--/.nav-collapse -->
@@ -30,16 +31,21 @@
           <div class="row">
             <div class="col-md-3">
               <ul class="list-group">
-                <li class="list-group-item"><a href="/albums">View Alnums</a></li>
+                <li class="list-group-item"><a href="/albums">View Albums</a></li>
                 <li class="list-group-item"><a href="/genres">View Genres</a></li>
                 </ul>
             </div>
             <div class="col-md-9">
-            </div>
-          </div>
-        </div>
-        <footer>
-          <p class="text-center">MNM &copy; 2016, All Rights Reserved</p>
-        </footer>
-  </body>
-</html>
+              <% (success_msg != false){%>
+                <div class="alert alert-success">
+                  <%= success_msg %>
+                </div>
+              <% } %>
+              <% if(error_msg != false){ %>
+                <div class="alert alert-danger">
+                  <%= error_msg %>
+                </div>
+                <% } %>
+
+</body>
+              </html>
